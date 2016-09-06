@@ -2,20 +2,17 @@ package com.test;
 
 import javax.annotation.Resource;
 
-import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.azld.model.User;
 import com.azld.model.UserKey;
-import com.azld.service.impl.*;
-import com.azld.service.*;
+import com.azld.service.UserService;
 import com.azld.IDao.*;
 @RunWith(SpringJUnit4ClassRunner.class)     //表示继承了SpringJUnit4ClassRunner类  
-@ContextConfiguration(locations = {"classpath:spring-mybatis.xml, classpath:spring.xml"})  
+@ContextConfiguration(locations = {"classpath:spring-mybatis.xml","classpath:spring.xml"})  
 
 public class UserServiceTest 
 {
@@ -28,16 +25,16 @@ public class UserServiceTest
 	private UserMapper auserwapper;
 	
 	@Resource
-//	private UserService auserservice;
+	private UserService auserservice;
 	
-//	@Test
-//	public void test1()
-//	{
-//		System.out.println("begin select");
-//		User auser = auserwapper.selectByPrimaryKey(1);
-//		System.out.println(auser);
-//		System.out.println("end select");
-//	}
+	@Test
+	public void test1()
+	{
+		System.out.println("begin select");
+		User auser = this.auserservice.getuserwithuid(1);
+		System.out.println(auser);
+		System.out.println("end select");
+	}
 //	@Test
 //	public void testserver()
 //	{
@@ -86,19 +83,7 @@ public class UserServiceTest
 		else
 		{
 			System.out.println(btest);
-		}
-			
-//		auserwapper.insertSelective(auser);
-//		UserKey userkey2 = new UserKey();
-//		userkey2.setName(auser.getName());
-//		userkey2.setId(9);
-//		User buser = this.auserwapper.selectByPrimaryKey(userkey2);
-//		User causer = this.auserwapper.selectByPrimaryKeyID(userkey2);
-//		
-//		System.out.println(buser);
-//		System.out.println(causer);
-//		System.out.println("end insert");
-//		System.out.println("end");
+		}			
 	}
 	
 }
