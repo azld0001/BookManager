@@ -1,6 +1,6 @@
 package com.azld.model;
 
-public class UserKey {
+public class userKey {
     private Integer id;
 
     private String name;

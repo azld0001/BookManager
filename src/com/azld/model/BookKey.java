@@ -1,6 +1,6 @@
 package com.azld.model;
 
-public class BookKey {
+public class bookKey {
     private Integer id;
 
     private String name;

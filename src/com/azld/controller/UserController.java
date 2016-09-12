@@ -21,8 +21,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.azld.model.User;
-import com.azld.service.UserService;
+//import com.azld.model.User;
+//import com.azld.service.UserService;
 
 
 
@@ -31,6 +31,7 @@ import com.azld.service.UserService;
 @RequestMapping("/user")
 public class UserController
 {
+	/*
 	@Resource
 	private UserService		auserservice;
 	
@@ -47,7 +48,8 @@ public class UserController
         
         return mav;
     }
-
+    */
+    /*
     @ResponseBody  
     @RequestMapping("/list3")  
     public String list(HttpServletRequest request, HttpServletResponse response,String contentType2)
@@ -84,7 +86,9 @@ public class UserController
         
         return content;
     }  
+    */
     
+    /*
 	@RequestMapping("/showuserinfo/{username}")
     public ModelAndView toshowuserinfowithname(ModelMap modelMap, @PathVariable String username)
     {
@@ -216,6 +220,6 @@ public class UserController
     	return "userlist";
         
     }
-
+    */
     
 }

@@ -1,3 +1,7 @@
 eclipse.preferences.version=1
 encoding//src/com/azld/controller/UserController.java=UTF-8
+encoding//src/com/azld/service/impl/BookServiceImpl.java=UTF-8
+encoding//src/com/azld/service/impl/UserServiceImpl.java=UTF-8
+encoding//src/com/test/BookServiceTester.java=UTF-8
+encoding//src/com/test/BusynessServiceTester.java=UTF-8
 encoding//src/com/test/UserServiceTest.java=UTF-8

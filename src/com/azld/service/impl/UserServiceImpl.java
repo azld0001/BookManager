@@ -2,97 +2,87 @@ package com.azld.service.impl;
 
 import java.util.List;
 
-import com.azld.model.User;
-import com.azld.model.UserKey;
-import com.azld.service.UserService;
-
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.azld.IDao.UserMapper;
+import com.azld.Dao.userMapper;
+import com.azld.model.user;
+import com.azld.model.userKey;
+import com.azld.service.UserService;
 
-@Service("UserService")
-//@Service
-//@Autowired("userService")
-public class UserServiceImpl implements UserService {
 
+@Service("userService")
+public class UserServiceImpl implements UserService 
+{
 	@Resource
-	private	UserMapper		aUserMapper;
+	private userMapper		usermaper;
 	
 	@Override
-	public User getuserwithPK(User auser)
-	{
-		UserKey usekey = new UserKey();
-		usekey.setName(auser.getName());
-		
-		return aUserMapper.selectByPrimaryKey(usekey);
-//		return aUserMapper.selectByPrimaryKey(auser);
-	}
-	
-	@Override
-	public User getuserwithuid(Integer uid)
-	{
-		UserKey usekey = new UserKey();
-		usekey.setId(uid);
-		
-		return aUserMapper.selectByPrimaryKeyID(usekey);
-	}
-	
-	@Override
-	public User add(User auser)
-	{
-		UserKey uk = new UserKey();
-		uk.setName(auser.getName());
-		User buser = this.aUserMapper.selectByPrimaryKeyName(uk);
-		if( buser == null )
+	public int add(user u)
+	{ // 0:成功  1:已存在该用户名的用户
+		user au = this.getwithname(u.getName());
+		if( au == null )
 		{
-			this.aUserMapper.insert(auser);
-			User cuser = this.aUserMapper.selectByPrimaryKeyName(uk);
-			auser.setId(cuser.getId());
-			return auser;
+			this.usermaper.insert(u);
+			return 0;
 		}
-		else
-		{
-			return null;
-		}
+		return 1;
 	}
 
 	@Override
-	public Integer delete(User auser) {
-		// TODO Auto-generated method stub
-		return null;
+	public int delete(Integer uid) 
+	{// 0 成功  1:无此用户
+		int iret = 1;
+		user au = this.getwithid(uid);
+		if( au == null )
+		{
+			return iret;
+		}
+		userKey uk = new userKey();
+		uk.setId(uid);
+		this.usermaper.deleteByPrimaryKey(uk);
+		return 0;
 	}
 
 	@Override
-	public User login(User auser) {
+	public int edit(user u) 
+	{
+		user au = this.getwithid(u.getId());
+		if( au == null )
+		{
+			return 1;
+		}
 		
-		UserKey uk = new UserKey();
-		uk.setName(auser.getName());
-		User buser = this.aUserMapper.selectByPrimaryKeyName(uk);
-		if( buser == null )
-		{
-			return buser;
-		}
-		else
-		{
-			if( auser.getName().equals(buser.getName()) == true)
-			{
-				return buser;
-			}
-			else
-			{
-				return null;
-			}
-		}
+		this.usermaper.updateByPrimaryKey(u);
+		
+		return 0;
 	}
 
 	@Override
-	public List<User> list(Integer id) {
-		UserKey uk = new UserKey();
-		uk.setId(id);
-		List<User> alist = this.aUserMapper.selectUserList(uk);
-		return alist;
+	public user getwithid(Integer uid) 
+	{
+		userKey uk = new userKey();
+		uk.setId(uid);
+		user au = this.usermaper.selectByPrimaryKeyID(uk);
+		return au;
 	}
-		
+
+	@Override
+	public user getwithname(String uname) 
+	{
+		userKey uk = new userKey();
+		uk.setName(uname);
+		user au = this.usermaper.selectByPrimaryKeyName(uk);
+		return au;
+	}
+	
+	@Override
+	public List<user> list(Integer uid)
+	{
+		userKey uk = new userKey();
+		uk.setId(uid);
+		List<user> userlist = this.usermaper.selectUsersWithID(uk);
+		return userlist;
+	}
 }

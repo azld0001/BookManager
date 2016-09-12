@@ -2,18 +2,18 @@ package com.azld.service;
 
 import java.util.List;
 
-import com.azld.model.User;
+import com.azld.model.user;
 
 public interface UserService 
 {
-	public User getuserwithPK(User auser);
+	int add(user u);
 	
-	public User getuserwithuid(Integer uid);
+	int delete(Integer uid);
 	
-	public User add(User auser);
-	public Integer delete(User auser);
-	public User login(User auser);
-	public List<User> list(Integer id);
+	int	edit(user u);
 	
+	user getwithid(Integer uid);
+	user getwithname(String uname);
 	
+	List<user> list(Integer uid);
 }
